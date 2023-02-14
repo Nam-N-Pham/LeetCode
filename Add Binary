@@ -1,0 +1,37 @@
+Given two binary strings a and b, return their sum as a binary string.
+
+ 
+
+Example 1:
+
+Input: a = "11", b = "1"
+Output: "100"
+Example 2:
+
+Input: a = "1010", b = "1011"
+Output: "10101"
+ 
+
+Constraints:
+
+1 <= a.length, b.length <= 104
+a and b consist only of '0' or '1' characters.
+Each string does not contain leading zeros except for the zero itself.
+
+Initial brute force approach:
+public class Solution {
+    public string AddBinary(string a, string b) {
+        int base10_a = Convert.ToInt32(a, 2);
+        int base10_b = Convert.ToInt32(b, 2);
+
+        int base10_answer = base10_a + base10_b;
+
+        string answer = Convert.ToString(base10_answer, 2);
+
+        return answer;
+    }
+}
+
+The approach works but won't pass when a and b are very long.
+The key to the problem is using a carry and directly adding the binary numbers.
+
