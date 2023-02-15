@@ -36,3 +36,36 @@ public class Solution {
 
 The approach works but won't pass when a and b are very long.
 The key to the problem is using a carry and directly adding the binary numbers.
+
+public class Solution {
+    public string AddBinary(string a, string b) {
+        StringBuilder answer = new StringBuilder();
+        int currentDigitOf_a = a.Length - 1;
+        int currentDigitOf_b = b.Length - 1;
+        int carry = 0;
+
+        while (currentDigitOf_a >= 0 || currentDigitOf_b >= 0) {
+            int sum = carry;
+
+            if (currentDigitOf_a >= 0){
+                sum += a[currentDigitOf_a--] - '0';
+            }
+
+            if (currentDigitOf_b >= 0) {
+                sum+= b[currentDigitOf_b--] - '0';
+            }
+
+            if (sum > 1)
+                carry = 1;
+            else
+                carry = 0;
+
+            answer.Append(sum % 2);
+        }
+
+        if (carry != 0)
+            answer.Append(carry);
+        
+        return new string(answer.ToString().Reverse().ToArray());
+    }
+}
