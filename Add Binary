@@ -69,3 +69,6 @@ public class Solution {
         return new string(answer.ToString().Reverse().ToArray());
     }
 }
+
+Time: O(max(|a|, |b|))
+Space: O(max(|a|, |b|))
