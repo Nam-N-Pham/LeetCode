@@ -52,3 +52,35 @@ public class Solution {
 }
 
 The code passes the submission.
+Another approach to the problem is to use a HashMap. The key would be the value of a number in the array and the value would be the index of that number.
+You would constantly check if an array value you are looking at has a corresponding key that sums up to the target.
+mapKey = target - current
+
+public class Solution {
+    public int[] TwoSum(int[] nums, int target) {
+        int[] answer = new int[2];
+        Dictionary<int, int> KeyNumberValueIndex = new Dictionary<int, int>();
+        int sum = 0;
+
+        for (int i = 0; i < nums.Length; i++) {
+            if (KeyNumberValueIndex.ContainsKey(target - nums[i])) {
+                answer[0] = i;
+                answer[1] = KeyNumberValueIndex[target - nums[i]];
+                break;
+            }
+
+            if (KeyNumberValueIndex.ContainsKey(nums[i])) {
+                continue;
+            }
+
+            KeyNumberValueIndex.Add(nums[i], i);
+        }
+
+        return answer;
+    }
+}
+
+The code is faster but it uses more memory.
+Ideal complexities
+Time: O(n)
+Space: O(n)
