@@ -60,3 +60,23 @@ public class Solution {
         }
     }
 }
+
+Another way to do the problem is to look at the input number starting from the ones place. If the digit is not a 9, add 1 then return the answer. If the digit
+is a 9, change it into a 0 then move to the next digit. In the case the entire input is 9's, you will need to create a new array that is 1 element longer
+than the input. The first element of the new array is 1 and the rest is 0's and return that array.
+
+public class Solution {
+    public int[] PlusOne(int[] digits) {
+        for (int i = digits.Length - 1; i >= 0; i--) {
+            if (digits[i] != 9) {
+                digits[i] = digits[i] + 1;
+                return digits;
+            }
+            digits[i] = 0;
+        }
+
+        int[] extraDigitAnswer = new int[digits.Length + 1];
+        extraDigitAnswer[0] = 1;
+        return extraDigitAnswer;
+    }
+}
