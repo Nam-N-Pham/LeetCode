@@ -64,3 +64,24 @@ public class Solution {
         return calculateStairs(n);
     }
 }
+
+Final optimized version:
+public class Solution {
+    public int ClimbStairs(int n) {
+        if (n < 3) {
+            return n;
+        }
+
+        int twoStepsDown = 1;
+        int oneStepDown = 2;
+        int currentStep = 0;
+
+        for (int i = 3; i <= n; i++) {
+            currentStep = twoStepsDown + oneStepDown;
+            twoStepsDown = oneStepDown;
+            oneStepDown = currentStep;
+        }
+
+        return currentStep;
+    }
+}
