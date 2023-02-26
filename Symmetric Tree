@@ -1,0 +1,91 @@
+Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+
+ 
+
+Example 1:
+
+
+Input: root = [1,2,2,3,4,4,3]
+Output: true
+Example 2:
+
+
+Input: root = [1,2,2,null,3,null,3]
+Output: false
+ 
+
+Constraints:
+
+The number of nodes in the tree is in the range [1, 1000].
+-100 <= Node.val <= 100
+
+Traverse the left side of the root then traverse the right side of the root in such a way that they mirror each other. On the left side, use preorder traversal that
+goes right and on the right side, use preorder traversal that goes left. A null child that has a sibling is represented by the max int value.
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+public class Solution {
+    public bool IsSymmetric(TreeNode root) {
+        List<int> orderLeft = new List<int>();
+        List<int> orderRight = new List<int>();
+
+        void TraversalLeftSide(TreeNode parent, List<int> vals) {
+            if (parent == null) {
+                return;
+            }
+
+            vals.Add(parent.val);
+            if (parent.right != null) {
+                TraversalLeftSide(parent.right, vals);
+            } else {
+                vals.Add(Int32.MaxValue);
+            }
+            if (parent.left != null) {
+                TraversalLeftSide(parent.left, vals);
+            } else {
+                vals.Add(Int32.MaxValue);
+            }
+        }
+
+        void TraversalRightSide(TreeNode parent, List<int> vals) {
+            if (parent == null) {
+                return;
+            }
+
+            vals.Add(parent.val);
+            if (parent.left != null) {
+                TraversalRightSide(parent.left, vals);
+            } else {
+                vals.Add(Int32.MaxValue);
+            }
+            if (parent.right !=null) {
+                TraversalRightSide(parent.right, vals);
+            } else {
+                vals.Add(Int32.MaxValue);
+            }
+        }
+
+        TraversalLeftSide(root.left, orderLeft);
+        TraversalRightSide(root.right, orderRight);
+        if (orderLeft.Count != orderRight.Count) {
+            return false;
+        }
+
+        for (int i = 0; i < orderLeft.Count; i++) {
+            if (orderLeft[i] != orderRight[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
