@@ -61,3 +61,28 @@ public class Solution {
         return middleNode;
     }
 }
+
+Old attempt, did not work.
+public class Solution {
+    public TreeNode SortedArrayToBST(int[] nums) {
+        TreeNode leftTree = new TreeNode(nums[ (int)Math.Ceiling(nums.Length / 2.0 - 1) ], null, null);
+        TreeNode rightTree = new TreeNode(nums[nums.Length - 1], null, null);
+
+        void createTree(TreeNode node, int[] vals, int startIndex, int endIndex) {
+            if (startIndex < endIndex) {
+                return;
+            }
+
+            TreeNode newNode = new TreeNode(vals[startIndex], null, null);
+            node.left = newNode;
+            startIndex--;
+            createTree(newNode, vals, startIndex, endIndex);
+        }
+
+        createTree(leftTree, nums, (int)Math.Ceiling(nums.Length / 2.0 - 1) - 1, 0);
+        createTree(rightTree, nums, nums.Length - 2, (int)Math.Ceiling(nums.Length / 2.0 - 1) + 1);
+
+        leftTree.right = rightTree;
+        return leftTree;
+    }
+}
